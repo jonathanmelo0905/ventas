@@ -50,7 +50,8 @@ export class ClientesComponent implements OnInit {
 
   signOff() {
     localStorage.removeItem('stateSession');
-    localStorage.removeItem('session')
+    localStorage.removeItem('session');
+    localStorage.removeItem('clientes');
     this.router.navigate(['/']);
   }
 

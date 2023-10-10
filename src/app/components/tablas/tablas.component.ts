@@ -44,7 +44,8 @@ export class TablasComponent implements OnInit {
     this.litsClient = await this.data.getclients();
     this.clientesLista = this.litsClient;
     let clientes = JSON.parse(localStorage.getItem('clientes') || '0');
-    let nuevosClientes = this.clientesLista.length - clientes;
+    let nuevosClientes!: number;
+    clientes == 0 ? nuevosClientes = 0 : nuevosClientes = this.clientesLista.length - clientes;
     if(nuevosClientes > 0){
       localStorage.setItem('newClientes', JSON.stringify(nuevosClientes))
       this.clientesSvc.modalNewClients(true);

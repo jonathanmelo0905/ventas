@@ -7,7 +7,7 @@
     <button [disabled]="session.invalid" type="submit" class="boton">Iniciar sesión</button>
     <p style="cursor: pointer;color: rgb(255, 255, 255); font-weight: 700;">¿Olvidaste tu contraseña?</p>
     <button (click)="backButton()"  class="boton2">Crear cuenta nueva</button>
-    <div *ngIf="(isUser || isPassword)">
+    <div *ngIf="isPassword">
         <p>el usuario o la contraseña son incorrectas</p>
         <p>intente de nuevo</p>
     </div>

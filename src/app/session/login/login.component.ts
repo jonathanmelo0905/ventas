@@ -12,12 +12,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class LoginComponent implements OnInit {
 
-  estudiantes: InfoSalesman[] = [];
+  vendedores: InfoSalesman[] = [];
   session: FormGroup = new FormGroup({});
-
   isPassword: boolean = false;
-  isUser: boolean = false;  
-  respuesta: any = <any>{}
 
   constructor(private router: Router, 
     private dataServices: DataService
@@ -43,16 +40,15 @@ export class LoginComponent implements OnInit {
   getData() {
     this.dataServices.getVendedores().subscribe(
       res=>{
-        this.estudiantes = res.clients;
-        console.log("estudiantes:", this.estudiantes)
+        this.vendedores = res.clients;
         this.logIn();
       }
     )
   }
 
   logIn() {
-    const data = JSON.parse(localStorage.getItem('stateSession') || '0');
-    if (data != 0) this.validationIdentidad(data);
+    const data = JSON.parse(localStorage.getItem('session') || 'false');
+    if (data) this.router.navigate([UrlPages.HOME]);
   }
 
   validationSession(data: any) {
@@ -61,21 +57,14 @@ export class LoginComponent implements OnInit {
   }
 
   validationIdentidad(data: any) {
-    this.estudiantes.filter((e: any) => {
-      if (e.user === data.user) {
-        this.isUser = false;
-        if (e.password === data.password) {
-          this.isPassword = false;
-          localStorage.setItem('stateSession', JSON.stringify(e));
-          localStorage.setItem('session', 'true');
-          this.router.navigate(['/', 'home']);
-        }else{
-          this.isPassword = true;
-        }
-      }else{
-        this.isUser = true;
-      }
-    });
+    let user = this.vendedores.find( user => user.password == data.password && user.user == data.user);
+    if(user){
+      localStorage.setItem('stateSession', JSON.stringify(user));
+      localStorage.setItem('session', 'true');
+      this.router.navigate(['/', 'home']);
+    }else{
+      this.isPassword = true;
+    }
   }
 
   backButton(){
