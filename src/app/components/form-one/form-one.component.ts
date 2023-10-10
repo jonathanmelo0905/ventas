@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-form-one',
@@ -7,21 +8,29 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class FormOneComponent implements OnInit {
 
-  @Input('data') info: any;
-  @Output() newItemEvent = new EventEmitter<boolean>();
+  // @Input('data') info: any;
+  // @Output() newItemEvent = new EventEmitter<boolean>();
   mensaje: string = '';
+  amount: number = 0;
   name: string = '';
 
-  constructor() { }
+  constructor(
+    private clientesSvc: ClientesService,) { }
 
   ngOnInit(){
     let data = JSON.parse(localStorage.getItem('stateSession') || '0');
+    this.amount = JSON.parse(localStorage.getItem('newClientes') || '0');
     this.name = data.name
-    this.mensaje = this.info.mensaje;
+    if(this.amount > 1){
+      this.mensaje = `Tienes ${this.amount} clientes nuevos`;
+    }else{
+      this.mensaje = `Tienes un nuevo cliente`;
+    }
   }
 
-  addNewItem(value: boolean) {
-    this.newItemEvent.emit(value);
+  closeModal(){
+    this.clientesSvc.modalNewClients(false);
   }
+
 
 }

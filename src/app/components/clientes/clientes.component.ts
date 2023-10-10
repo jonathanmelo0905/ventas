@@ -1,14 +1,7 @@
-import { Clients, DataClients } from './../../models/clients.models';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Medio } from 'src/app/models/medios.models';
 import { DataService } from 'src/app/services/data.service';
-import { SwPush } from '@angular/service-worker';
-import { DataKeys } from 'src/app/models/notificacion.models';
-import { Result } from 'src/app/models/pasos.models';
 import { SessionService } from 'src/app/services/session.service';
-import { IconsList, StartList } from 'src/app/enums/starts';
-import { ClientsList } from 'src/app/directivas/clientesInfo';
 import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
@@ -28,6 +21,7 @@ export class ClientesComponent implements OnInit {
   status: boolean = true;
   onOff: string = ''
   modal: boolean = false;
+  alerta: boolean = false;
   
   constructor(
     private router: Router,
@@ -37,6 +31,7 @@ export class ClientesComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.newClients();
     this.logIn();
     this.clientesSvc.amount$.subscribe({
       next: res => this.amountClient = res
@@ -72,5 +67,8 @@ export class ClientesComponent implements OnInit {
     )
   }
 
+  newClients(){
+    this.clientesSvc.newClientes$.subscribe(res => this.alerta = res)
+  }
   
 }

@@ -19,7 +19,7 @@
         <p class="producto">{{client.name}} <br> id: {{client.id_client}}</p>
         <p class="producto">{{client.email}}</p>
         <p class="categoria">{{client.phone}}</p>
-        <p class="stock">{{client.date}} {{client.time}}</p>
+        <p class="stock">{{client.date | date}} {{client.time}}</p>
         <p class="und">{{filterMedio(client.medio)}}</p>
         <div class="basura">{{client.level + 1}}</div>
     </div>

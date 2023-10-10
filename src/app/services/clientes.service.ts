@@ -10,6 +10,7 @@ export class ClientesService {
 
   constructor() { }
 
+  private newClientes = new BehaviorSubject<boolean>(false)
   private isFilter = new BehaviorSubject<boolean>(false);
   private open = new BehaviorSubject<boolean>(false);
   private filtro = new Subject<Medio[]>();
@@ -23,6 +24,11 @@ export class ClientesService {
   amount$ = this.amount.asObservable();
   isFilter$ = this.isFilter.asObservable();
   isSearch$ = this.isSearch.asObservable();
+  newClientes$ = this.newClientes.asObservable();
+
+  modalNewClients(estado: boolean){
+    this.newClientes.next(estado)
+  }
 
   onStar(star: boolean){
     this.star.next(star);

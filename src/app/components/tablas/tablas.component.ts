@@ -43,6 +43,13 @@ export class TablasComponent implements OnInit {
   async callClass(){
     this.litsClient = await this.data.getclients();
     this.clientesLista = this.litsClient;
+    let clientes = JSON.parse(localStorage.getItem('clientes') || '0');
+    let nuevosClientes = this.clientesLista.length - clientes;
+    if(nuevosClientes > 0){
+      localStorage.setItem('newClientes', JSON.stringify(nuevosClientes))
+      this.clientesSvc.modalNewClients(true);
+    }
+    localStorage.setItem('clientes', JSON.stringify(this.clientesLista.length))
     this.clientesAmount();
     this.itemsMedios = await this.data.getMedios();
   }

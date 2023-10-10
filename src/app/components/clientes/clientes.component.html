@@ -21,35 +21,5 @@
 <app-resumen-clientes *ngIf="modal"></app-resumen-clientes>
 
 
-
-
-
-
-
-
-
-
-
-<!-- <app-form-one *ngIf="alerta" (newItemEvent)="addItem($event)" [data]="{ mensaje: mensaje, icon: 'assets/iconos/ingresar.png' }"></app-form-one>-->
-
-
-<!-- UPDATE `ventas__firstMoment_client_capturing` SET remarketing = CASE WHEN DATEDIFF(CURDATE(), STR_TO_DATE(date, '%Y-%m-%d')) > 60 THEN 1 -- Si la diferencia es menor o igual a 30 días ELSE 0 -- Si la diferencia es mayor a 30 días END;
-
-WHERE STR_TO_DATE(date, '%Y-%m-%d') IS NOT NULL; -->
-
-<!-- UPDATE `ventas__firstMoment_client_capturing`
-SET remarketing = CASE
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%Y-%m-%d'), '%Y-%m-%d') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%Y-%m-%d')) > 60 THEN 1
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%d/%m/%Y'), '%d/%m/%Y') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%d/%m/%Y')) > 60 THEN 1
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%m-%d-%Y'), '%m-%d-%Y') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%m-%d-%Y')) > 60 THEN 1
-                    ELSE 0
-                 END; -->
-
-                 <!-- UPDATE `ventas__firstMoment_client_capturing`
-SET remarketing = CASE
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%Y-%m-%d'), '%Y-%m-%d') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%Y-%m-%d')) > 15 AND level <= 3 THEN 1
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%d/%m/%Y'), '%d/%m/%Y') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%d/%m/%Y')) > 15 AND level <= 3 THEN 1
-                    WHEN DATE_FORMAT(STR_TO_DATE(date, '%m-%d-%Y'), '%m-%d-%Y') IS NOT NULL AND DATEDIFF(CURDATE(), STR_TO_DATE(date, '%m-%d-%Y')) > 15 AND level <= 3 THEN 1
-                    ELSE 0
-                 END; -->
+<app-form-one *ngIf="alerta"></app-form-one>
 
