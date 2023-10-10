@@ -22,6 +22,7 @@ export class TablasComponent implements OnInit {
   search: string = '';
   clientesLista: Clients[] = [];
   litsClient: Clients[] = [];
+  searchList: Clients[] = [];
   itemsMedios: Medio[] = [];
 
 
@@ -35,6 +36,8 @@ export class TablasComponent implements OnInit {
     this.callClass();
     this.onFilter();
     this.onStar();
+    this.eliminarFiltro();
+    this.busqueda();
   }
 
   async callClass(){
@@ -63,24 +66,10 @@ export class TablasComponent implements OnInit {
       return 'INDEFINIDO';
     }
   }
-
-  onStart(id: any): any{
-    let n=0;
-    this.stars.forEach(star =>{
-      if(n<id){
-        star.star = StarGold;
-      }else{
-        star.star = StarBlack;
-      }
-      n++;
-    })
-    return this.stars
-  }
   
   onFilter(){
     this.clientesSvc.filtro$.subscribe({
       next: res => {
-        console.log("melo:", res)
         this.onFilterCategoria(res)
       }
     })
@@ -115,6 +104,30 @@ export class TablasComponent implements OnInit {
           })
           this.clientesAmount();
         }
+      }
+    })
+  }
+
+  eliminarFiltro(){
+    this.clientesSvc.isFilter$.subscribe(res=>{
+      if(res){
+        this.litsClient = this.clientesLista;
+        this.clientesAmount();
+      }
+    })
+  }
+
+  busqueda(){    
+    this.clientesSvc.isSearch$.subscribe({
+      next: arg =>{
+        this.searchList = this.litsClient;
+        const resultFilter = [];
+        for(const post of this.litsClient){
+          if((post.name.toUpperCase().indexOf(arg.toUpperCase()) > -1) || (post.email.toUpperCase().indexOf(arg.toUpperCase()) > -1) || (post.phone.indexOf(arg) != -1)){
+            resultFilter.push(post);
+          }
+        }
+        this.litsClient = resultFilter;
       }
     })
   }

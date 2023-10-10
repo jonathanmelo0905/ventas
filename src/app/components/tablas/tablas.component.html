@@ -1,40 +1,7 @@
-<!-- <div class="tabla" *ngIf="listclients">
-    <p>lista de clientes {{nameList}}</p>
-    <div class="search">
-        <p>Buscar:</p>
-        <input type="text" [(ngModel)]="search">
-    </div>
-    <table>
-        <tr class="tittle">
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Celular</th>
-            <th>fecha</th>
-            <th>Medio</th>
-            <th>pasos</th>
-            <th>Stars</th>
-        </tr>
-        <div class="scroll">
-            <tr (click)="seeClient(client)" *ngFor="let client of litsClient | searchs:search">
-                <td>{{client.id_client}}</td>
-                <td>{{client.name}}</td>
-                <td>{{client.email}}</td>
-                <td>{{client.phone}}</td>
-                <td>{{client.date | date}} {{client.time}}</td>
-                <td>{{filterMedio(client.medio)}}</td>
-                <td>{{client.level + 1}}</td>
-                <td><div class="stars">
-                    <img *ngFor="let star of onStart(client.prioridad)" class="star" src={{star.star}} alt="">
-                </div></td>
-            </tr>
-        </div>
-    </table>
-</div> -->
 <div class="container">
     <div class="box">
         <div class="checkbox">
-            <input type="checkbox" name="" id="">
+            <img class="star" src="assets/iconos/star_gold.png" alt="">
         </div>
         <p class="producto">Nombre</p>
         <p class="producto">Email</p>
@@ -45,7 +12,8 @@
     </div>
     <div class="box lista" *ngFor="let client of litsClient" (click)="seeClient(client)">
         <div class="checkbox">
-            <input type="checkbox" name="" id="">
+            <img class="star" src="assets/iconos/star_gold.png" alt="" *ngIf="client.prioridad > 0">
+            <img class="star" src="assets/iconos/star_black.png" alt="" *ngIf="client.prioridad < 1">
             <span>Seleccionar</span>
         </div>
         <p class="producto">{{client.name}} <br> id: {{client.id_client}}</p>

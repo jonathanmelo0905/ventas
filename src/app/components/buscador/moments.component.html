@@ -1,16 +1,19 @@
 <div class="container">
     <div class="search" id="search">
-        <input type="search" placeholder="Articulo nuevo">
-        <img src="assets/icons/lupa.png" alt="" class="icon">
+        <input type="search" placeholder="Articulo nuevo" [(ngModel)]="buscarName">
+        <img src="assets/icons/lupa.png" alt="" class="icon" (click)="buscador()">
     </div>
     <div class="box">
-        <div class="filtro" *ngIf="false">
+        <div class="filtro" *ngIf="filtroName" [ngClass]="{'isFiltro': filtroName}">
             <img src="assets/icons/filtrar.png" alt="" class="icon">
-            <p>Filtro</p>
+            <p>{{filtroName}}</p>
+            <img class="icon delete" src="assets/iconos/delete.png" (click)="eliminarFiltros(0)">
         </div>
-        <div class="filtro" (click)="openFiltro()">
-            <img src="assets/icons/categoria.png" alt="" class="icon">
-            <p>Categorias</p>
+        <div class="filtro" [ngClass]="{'isFiltro': isFiltro}">
+            <p class="amount" *ngIf="isFiltro">{{amount}}</p>
+            <img src="assets/icons/categoria.png" alt="" class="icon" (click)="openFiltro()">
+            <p (click)="openFiltro()">Categorias</p>
+            <img class="icon delete" src="assets/iconos/delete.png" *ngIf="isFiltro" (click)="eliminarFiltros(1)">
         </div>
     </div>
     <button class="boton" routerLink="/create">

@@ -10,15 +10,19 @@ export class ClientesService {
 
   constructor() { }
 
+  private isFilter = new BehaviorSubject<boolean>(false);
   private open = new BehaviorSubject<boolean>(false);
   private filtro = new Subject<Medio[]>();
   private star = new BehaviorSubject<boolean>(false);
   private amount = new Subject<number>();
+  private isSearch = new Subject<string>();
 
   filtro$ = this.filtro.asObservable();
   open$ = this.open.asObservable();
   star$ = this.star.asObservable();
   amount$ = this.amount.asObservable();
+  isFilter$ = this.isFilter.asObservable();
+  isSearch$ = this.isSearch.asObservable();
 
   onStar(star: boolean){
     this.star.next(star);
@@ -34,5 +38,13 @@ export class ClientesService {
 
   onAmount(cantidad: number){
     this.amount.next(cantidad);
+  }
+
+  eliminarFiltros(isFiltro: boolean){
+    this.isFilter.next(isFiltro);
+  }
+
+  search(arg: string){
+    this.isSearch.next(arg)
   }
 }

@@ -117,3 +117,16 @@
     display: none;
   }
 }
+.amount{
+  margin-right: 5px;
+}
+.delete{
+  margin-left: 5px;
+}
+.isFiltro{
+  background-color: #2dd1b1;
+  border-radius: 6px;
+}
+.isFiltro:hover {
+  background-color: #25bf97;
+}

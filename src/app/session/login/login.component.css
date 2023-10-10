@@ -7,10 +7,23 @@
   padding: 20px;
   width: 100%;
   height: 100%;
-  gap: 20px;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, .15);  
   backdrop-filter: blur(10px);
+}
+.texto {
+    width: 100%;
+    text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 20px;
+}
+label{
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 5px;
 }
 input {
   display: flex;
@@ -21,6 +34,7 @@ input {
   border-radius: 4px;
   border: solid rgb(236, 236, 236) 1px;
   outline: none;
+  margin-bottom: 20px;
 }
 .boton {
   display: flex;
@@ -36,6 +50,7 @@ input {
   font-weight: 800;
   font-size: large;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .boton2 {
   display: flex;
@@ -52,83 +67,8 @@ input {
   font-size: large;
   cursor: pointer;
   transition: 0.6s;
+  margin-top: 10px;
 }
 .boton2:hover {
   background-color: rgb(51, 157, 30);
-}
-p {
-  font-size: large;
-}
-
-.inicios {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 20px;
-  width: max-content;
-}
-.targets {
-  display: flex;
-  width: 100%;
-  height: 220px;
-  gap: 15px;
-}
-.tag {
-  display: grid;
-  grid-template-rows: 80% 20%;
-  width: 170px;
-  height: 100%;
-  align-items: flex-start;
-  justify-content: center;
-  overflow: hidden;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0px 1px 3px 3px rgb(221, 221, 221);
-  transition: 0.6s;
-  background-color: white;
-  cursor: pointer;
-}
-
-.tag:hover {
-  box-shadow: 0px 2px 5px 5px rgb(190, 190, 190);
-}
-.contain-foto {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(245, 246, 247);
-}
-.foto {
-  display: flex;
-  width: 100%;
-  height: 100%;
-}
-.texto {
-    width: 100%;
-    text-align: center;
-  font-size: 30px;
-  font-weight: 700;
-  color: white;
-}
-.icon {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 50px;
-  height: 50px;
-}
-.name {
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.imagenes {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
