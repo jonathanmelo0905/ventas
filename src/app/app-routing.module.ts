@@ -7,47 +7,53 @@ import { GraphicsComponent } from './components/graphics/graphics.component'
 import { LoginComponent } from './session/login/login.component'
 import { InicioComponent } from './session/inicio/inicio.component'
 import { CreateAccountComponent } from './session/create-account/create-account.component'
-import { TablasComponent } from './components/tablas/tablas.component'
 import { ResumenClientesComponent } from './components/filtro/resumen-clientes.component'
+import { UrlPages } from './enums/rutas'
+import { PermisionsGuard } from './guards/permisions.guard'
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/session/login' },
+  { path: '', pathMatch: 'full', redirectTo: UrlPages.LOGIN_PADRE },
   {
-    path: 'session',
+    path: UrlPages.SESSION,
     component: InicioComponent,
     children: [   
-      { path: '', pathMatch: 'full', redirectTo: '/session/login' },
+      { path: '', pathMatch: 'full', redirectTo: UrlPages.LOGIN_PADRE },
       {
-        path: 'login',
+        path: UrlPages.LOGIN,
         component: LoginComponent,
       },
       {
-        path: 'register',
+        path: UrlPages.REGISTRO,
         component: CreateAccountComponent,
       }
     ]
   },
   {
-    path: 'home',
-    component: ClientesComponent
+    path: UrlPages.HOME,
+    component: ClientesComponent,
+    canActivate: [PermisionsGuard]
   },
   {
-    path: 'resumen',
-    component: DescripcionComponent
+    path: UrlPages.RESUMEN,
+    component: DescripcionComponent,
+    canActivate: [PermisionsGuard]
   },
   {
-    path: 'load-clientes',
-    component: LoadClientsComponent
+    path: UrlPages.CARGAR_CLIENTES,
+    component: LoadClientsComponent,
+    canActivate: [PermisionsGuard]
   },
   {
-    path: 'graficas',
-    component: GraphicsComponent
+    path: UrlPages.GRAFICAS,
+    component: GraphicsComponent,
+    canActivate: [PermisionsGuard]
   },
   {
-    path: 'pruebas',
-    component: ResumenClientesComponent
+    path: UrlPages.PRUEBAS,
+    component: ResumenClientesComponent,
+    canActivate: [PermisionsGuard]
   },
-  { path: '**', redirectTo: '/session/login' }
+  { path: '**', redirectTo: UrlPages.LOGIN_PADRE }
 ]
 
 @NgModule({

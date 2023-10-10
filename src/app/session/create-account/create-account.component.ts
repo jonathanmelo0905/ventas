@@ -2,6 +2,7 @@ import { SessionService } from './../../services/session.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UrlPages } from 'src/app/enums/rutas';
 import { Respuesta } from 'src/app/models/res.models';
 import { InfoSalesman } from 'src/app/models/salesman.models';
 import { DataService } from 'src/app/services/data.service';
@@ -116,5 +117,9 @@ export class CreateAccountComponent implements OnInit {
 
   json(data: any){
     return JSON.stringify(data)
+  }
+
+  backButton(){
+    this.router.navigate([UrlPages.LOGIN_PADRE])
   }
 }

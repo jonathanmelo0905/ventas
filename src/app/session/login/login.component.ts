@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UrlPages } from 'src/app/enums/rutas';
 import { InfoSalesman } from 'src/app/models/salesman.models';
 import { DataService } from 'src/app/services/data.service';
 
@@ -15,12 +16,7 @@ export class LoginComponent implements OnInit {
   session: FormGroup = new FormGroup({});
 
   isPassword: boolean = false;
-  isUser: boolean = false;
-
-
-  
-
-  
+  isUser: boolean = false;  
   respuesta: any = <any>{}
 
   constructor(private router: Router, 
@@ -70,8 +66,9 @@ export class LoginComponent implements OnInit {
         this.isUser = false;
         if (e.password === data.password) {
           this.isPassword = false;
-          this.router.navigate(['/', 'home']);
           localStorage.setItem('stateSession', JSON.stringify(e));
+          localStorage.setItem('session', 'true');
+          this.router.navigate(['/', 'home']);
         }else{
           this.isPassword = true;
         }
@@ -81,6 +78,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  backButton(){
+    this.router.navigate([UrlPages.SESSION, UrlPages.REGISTRO])
+  }
   
 
 }

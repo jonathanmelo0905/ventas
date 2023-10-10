@@ -9,7 +9,7 @@
         <input formControlName="password" type="password" placeholder="Contraseña">
         <input formControlName="repeatPassword" type="password" placeholder="Confirma la contraseña">
         <button type="submit" class="boton">Crear cuenta nueva</button>
-        <button routerLink="/session/login" class="boton2">Iniciar sesión</button>
+        <button (click)="backButton()" class="boton2">Iniciar sesión</button>
         <p *ngIf="isPassword">{{alertPassword}}</p>
     </form>
 </div>
