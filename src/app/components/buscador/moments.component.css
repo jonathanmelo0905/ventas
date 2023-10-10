@@ -1,0 +1,119 @@
+.container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  padding: 0 15px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 6px;
+  border-radius: 8px;
+}
+.container .search {
+  display: flex;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  height: 46px;
+  border-radius: 8px;
+  border: solid #d9dce2 1.2px;
+  padding: 0 10px;
+}
+.container .search input {
+  width: 100%;
+  height: 80%;
+  border: none;
+  outline: none;
+  letter-spacing: normal;
+  margin-right: 5px;
+}
+.container .search:focus-within {
+  border: solid 1.2px #2dd1b1;
+}
+.container .search .icon {
+  width: 35px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 4px;
+  object-fit: contain;
+  cursor: pointer;
+}
+.container .search .icon:hover {
+  background-color: #f7f7f8;
+}
+.container .box {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-left: 20px;
+}
+.container .box .filtro {
+  display: flex;
+  width: max-content;
+  padding: 8px;
+  transition-duration: 0.3s;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.container .box .filtro .icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.container .box .filtro p {
+  font-weight: 500;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+.container .box .filtro:hover {
+  background-color: #f7f7f8;
+  border-radius: 4px;
+}
+@media screen and (max-width: 550px) {
+  .container .box .filtro {
+    margin-right: 5px;
+  }
+  .container .box .filtro p {
+    display: none;
+  }
+}
+.container .boton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 127px;
+  height: 46px;
+  background-color: #2dd1b1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.container .boton:hover {
+  background-color: #25bf97;
+}
+.container .boton .icon {
+  filter: invert(100%);
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.container .boton p {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+@media screen and (max-width: 550px) {
+  .container .boton {
+    min-width: auto;
+    width: max-content;
+    padding: 0px 10px;
+  }
+  .container .boton .icon {
+    margin: 0;
+  }
+  .container .boton p {
+    display: none;
+  }
+}

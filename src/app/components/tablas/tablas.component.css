@@ -1,0 +1,111 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.container .box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 42px;
+  border-bottom: solid 1.2px #d9dce2;
+  padding: 0 15px;
+}
+.container .box .checkbox {
+  position: relative;
+  width: 41px;
+  height: 24px;
+}
+.container .box .checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 24px;
+  height: 24px;
+  margin-right: 17px;
+  border: solid 2px #e8e9ea;
+  border-radius: 4px;
+  background-color: white;
+}
+.container .box .checkbox input[type="checkbox"]:checked {
+  background-color: #2dd1b1;
+}
+.container .box .checkbox span {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+.container .box .checkbox:hover span {
+  display: block;
+}
+.container .box .producto {
+  width: 100%;
+  max-width: 460px;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+.container .box .categoria,
+.container .box .stock,
+.container .box .und {
+  width: 100%;
+  max-width: 189px;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+.container .box .stock {
+  max-width: 100px;
+}
+.container .box .basura {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 40px;
+}
+.container .box .basura img {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+@media screen and (max-width: 700px) {
+  .container .box {
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  .container .box .basura,
+  .container .box .stock,
+  .container .box .categoria,
+  .container .box .producto,
+  .container .box .checkbox {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+.container .box.lista {
+  padding: 10px;
+}
+.container .box.lista p {
+  color: #535d6e;
+}
+@media screen and (max-width: 700px) {
+  .container .box.lista p {
+    font-size: 12px;
+    word-break: break-all;
+  }
+}
+.container .box.lista:hover {
+  background-color: white;
+}

@@ -1,0 +1,123 @@
+* {
+  color: #363f4d;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+.container {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.46);
+}
+.container .ventana {
+  width: 100%;
+  height: 100%;
+}
+.container .container2 {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 90%;
+  max-width: 400px;
+  height: 100%;
+  background-color: white;
+  transition: 0.5s all;
+  z-index: 1;
+}
+.container .container2 .box_titulo {
+  position: relative;
+  width: 100%;
+  height: max-content;
+  padding: 15px;
+  border-bottom: solid #e7e7e7 1.2px;
+}
+.container .container2 .box_titulo .close {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.container .container2 .box_titulo .close:hover {
+  background-color: #efefef;
+}
+.container .container2 .box {
+  width: 100%;
+  height: max-content;
+  padding: 15px;
+  border-bottom: solid #e7e7e7 1.2px;
+}
+.container .container2 .box .titulo {
+  margin-bottom: 30px;
+}
+.container .container2 .box .checkbox {
+  display: flex;
+  position: relative;
+  width: max-content;
+  height: 24px;
+  margin-bottom: 10px;
+}
+.container .container2 .box .checkbox p {
+  color: #363f4d;
+}
+.container .container2 .box .checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+  border: solid 2px #e8e9ea;
+  border-radius: 4px;
+  background-color: white;
+}
+.container .container2 .box .checkbox input[type="checkbox"]:checked {
+  background-color: #2dd1b1;
+}
+.container .container2 .box .checkbox:hover span {
+  display: block;
+}
+.container .container2 button {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 127px;
+  height: 46px;
+  background-color: #2dd1b1;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: 0.5s all;
+}
+.container .container2 button:hover {
+  background-color: #25bf97;
+}
+.container .container2 button:disabled {
+  background-color: #dbdbdb;
+  color: #f1f1f1;
+  margin-bottom: -60px;
+}
+.container .container2 button p {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+}
+.container .open {
+  right: 0;
+}

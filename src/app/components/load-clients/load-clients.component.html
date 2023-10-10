@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="salesman" *ngIf="status">
+        <p>Vendedores</p>
+        <div class="box">
+            <div class="amount" *ngFor="let vendedor of vendedores"  [ngClass]="{'cardInactive': !vendedor.estado}">
+                <div class="perfil">
+                    <img class="icon" src={{vendedor.url}} alt="">
+                    <p class="name">{{vendedor.name}}</p>
+                </div>
+                <div class="redes">
+                    <p>CLIENTES: {{amountSalesman(vendedor.password!)}}</p>
+                    <p *ngFor="let medio of itemsMedios">{{medio.name}}: {{amountMedios(vendedor.password, medio.id)}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="times">
+        <p>estadisticas de horario</p>
+        <div class="horas" *ngFor="let dia of semana; index as i">
+            <p>{{dia.amount}}</p>
+        </div>
+    </div> -->
+    <div class="list">
+        <p>cargar excell</p>
+        <input type="file" accept=".xlsx,.xls" name="cargar" (change)="cargar($event)" class="load">
+        <h3>Cantidad de clientes: {{clientes.length}}</h3>
+        <div class="medios">
+            <ng-container *ngFor="let red of redes; index as i">
+                <img class="medio" src={{icons[i].url}} alt="">
+                <p>:{{red.length}}</p>
+            </ng-container>
+        </div>
+        <p>Clientes repetidos: {{cantidad}}</p>
+        <div class="tabla">
+            <p>lista de clientes</p>
+            <table>
+                <tr class="tittle">
+                    <th>Nombre</th>
+                    <th>Celular</th>
+                    <th>Email</th>
+                    <th>id_camp</th>
+                    <th>medio</th>
+                    <th>project</th>
+                    <th>date</th>
+                    <th>time</th>
+                </tr>
+                <div class="scroll">
+                    <tr *ngFor="let client of clientes">
+                        <td>{{client.name}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{filtercampaing(client.id_camp)}}</td>
+                        <td>{{filterMedio(client.medio)}}</td>
+                        <td>{{filterProject(client.project)}}</td>
+                        <td>{{client.date}}</td>
+                        <td>{{client.time}}</td>
+                    </tr>
+                </div>
+            </table>
+            <p>Clientes cargados: {{loadClients}}</p>
+            <p>{{mensaje}}</p>
+            <button [disabled]="clientes.length == 0" (click)="loadClient()">Cargar clientes</button>
+        </div>
+    </div>
+</div>

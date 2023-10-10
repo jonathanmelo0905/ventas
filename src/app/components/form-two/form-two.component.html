@@ -1,0 +1,92 @@
+<div class="contenedor">
+    <form class="p1" [formGroup]="infoPasos">
+        <div class="box2">
+            <p class="titulo">{{ titulo }} ({{ idPasos }})</p>
+            <div class="box">
+                <ng-container *ngIf="estado === 1">
+                    <p class="titulo">{{ nameB }}</p>
+                    <div class="info">
+                        <p>Fecha:</p>
+                        <input type="date" class="date" formControlName="fecha_b" />
+                    </div>
+                    <div class="info">
+                        <p>Hora:  </p>
+                        <input type="time" class="date" formControlName="hora_b" />
+                    </div>
+                </ng-container>
+                <p class="titulo">{{ nameA }}</p>
+                <div class="info">
+                    <p>Fecha:</p>
+                    <input type="date" class="date" formControlName="fecha_a" />
+                </div>
+                <div class="info">
+                    <p>Hora:</p>
+                    <input type="time" class="date" formControlName="hora_a" />
+                </div>
+                <div class="info" *ngIf="idPasos != 3">
+                    <p>Medio:</p>
+                    <select name="" id="" formControlName="medio">
+                        <option value="1">Whatsapp</option>
+                        <option value="2">Llamada</option>
+                        <option value="3">Correo</option>
+                    </select>
+                </div>
+                <div class="info" *ngIf="idPasos == 3">
+                    <p>Medio:</p>
+                    <select name="" id="" formControlName="medio">
+                        <option value="1" *ngIf="stepThree > 0">Whatsapp</option>
+                        <option value="2">Llamada</option>
+                        <option value="3" *ngIf="stepThree > 0">Correo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box">
+                <div class="observaciones">
+                    <p>Observaciones:</p>
+                    <textarea name="" id="" cols="40" rows="5" formControlName="observaciones"></textarea>
+                </div>
+                <ng-container *ngIf="idPasos === 3">
+                    <div class="info" style="flex-direction: column; height: max-content">
+                        <p>Tipo de cita:</p>
+                        <select name="typeCita" id="" formControlName="typeCita">
+                            <option value="1">VIRTUAL</option>
+                            <option value="2">PRESENCIAL</option>
+                            <option value="3">PENDIENTE</option>
+                        </select>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="idPasos === 8 || idPasos === 5 || idPasos === 13">
+                    <div class="info" style="flex-direction: column; height: max-content">
+                        <p>Reagendar cita:</p>
+                        <select name="reschedule" id="" formControlName="reschedule">
+                            <option value="1">NO</option>
+                            <option value="2">SI</option>
+                        </select>
+                        <ng-container *ngIf="idPasos != 13">
+                            <p>Tipo de cita:</p>
+                            <select name="typeCita" id="" formControlName="typeCita">
+                                <option value="1">VIRTUAL</option>
+                                <option value="2">PRESENCIAL</option>
+                            </select>
+                        </ng-container>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </form>
+    <div class="box4">
+        <button [disabled]="infoPasos.invalid" (click)="sendForm(1)" class="boton">
+            REMARKETING
+        </button>
+        <button [disabled]="infoPasos.invalid" (click)="sendForm(2)" class="boton">
+            ENVIAR
+        </button>
+        <button [disabled]="infoPasos.invalid" (click)="sendForm(3)" *ngIf="idPasos < 17" class="boton">
+            VENTA
+        </button>
+    </div>
+</div>
+<app-form-one *ngIf="alerta" (newItemEvent)="addItem($event)"
+    [data]="{ mensaje: mensaje, icon: 'assets/iconos/ingresar.png' }"></app-form-one>

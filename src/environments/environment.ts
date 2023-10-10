@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'http://localhost:3000/habitat'
+  //apiUrl: 'https://back.habitatconstructores.co/habitat'
+  //apiUrl: 'http://192.168.0.125:3000/habitat'
 };
 
 /*

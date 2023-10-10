@@ -1,0 +1,12 @@
+<form  class="session" [formGroup]="session" (ngSubmit)="validationSession(session.value)">
+    <p class="texto">Habitat constructores S.A </p>
+    <input formControlName="user" type="text" placeholder="Usuario">
+    <input formControlName="password" type="password" placeholder="Contraseña">
+    <button [disabled]="session.invalid" type="submit" class="boton">Iniciar sesión</button>
+    <p style="cursor: pointer;color: rgb(255, 255, 255); font-weight: 700;">¿Olvidaste tu contraseña?</p>
+    <button routerLink="/session/register"  class="boton2">Crear cuenta nueva</button>
+    <div *ngIf="(isUser || isPassword)">
+        <p>el usuario o la contraseña son incorrectas</p>
+        <p>intente de nuevo</p>
+    </div>
+</form>

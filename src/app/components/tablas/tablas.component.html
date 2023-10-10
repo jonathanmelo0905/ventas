@@ -1,0 +1,58 @@
+<!-- <div class="tabla" *ngIf="listclients">
+    <p>lista de clientes {{nameList}}</p>
+    <div class="search">
+        <p>Buscar:</p>
+        <input type="text" [(ngModel)]="search">
+    </div>
+    <table>
+        <tr class="tittle">
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th>fecha</th>
+            <th>Medio</th>
+            <th>pasos</th>
+            <th>Stars</th>
+        </tr>
+        <div class="scroll">
+            <tr (click)="seeClient(client)" *ngFor="let client of litsClient | searchs:search">
+                <td>{{client.id_client}}</td>
+                <td>{{client.name}}</td>
+                <td>{{client.email}}</td>
+                <td>{{client.phone}}</td>
+                <td>{{client.date | date}} {{client.time}}</td>
+                <td>{{filterMedio(client.medio)}}</td>
+                <td>{{client.level + 1}}</td>
+                <td><div class="stars">
+                    <img *ngFor="let star of onStart(client.prioridad)" class="star" src={{star.star}} alt="">
+                </div></td>
+            </tr>
+        </div>
+    </table>
+</div> -->
+<div class="container">
+    <div class="box">
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+        </div>
+        <p class="producto">Nombre</p>
+        <p class="producto">Email</p>
+        <p class="categoria">Celular</p>
+        <p class="stock">Fecha</p>
+        <p class="und">Medio</p>
+        <p class="basura">paso</p>
+    </div>
+    <div class="box lista" *ngFor="let client of litsClient" (click)="seeClient(client)">
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <span>Seleccionar</span>
+        </div>
+        <p class="producto">{{client.name}} <br> id: {{client.id_client}}</p>
+        <p class="producto">{{client.email}}</p>
+        <p class="categoria">{{client.phone}}</p>
+        <p class="stock">{{client.date}} {{client.time}}</p>
+        <p class="und">{{filterMedio(client.medio)}}</p>
+        <div class="basura">{{client.level + 1}}</div>
+    </div>
+</div>

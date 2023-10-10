@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="estrellas">
+        <h3>Prioridad</h3>
+        <div class="calificacion">
+            <img class="star" (click)="qualification(star.id)" *ngFor="let star of stars" src={{star.star}} alt="">
+        </div>
+        <img class="back" (click)="close()" src="assets/iconos/delete.png" alt="">
+    </div>
+</div>

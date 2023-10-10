@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="box">
+        <img class="back" (click)="
+        close()" src="assets/iconos/volver-flecha.png" alt="">
+        <h1>Editar informacion del cliente</h1>
+        <form novalidate [formGroup]="user" (submit)="actualizar(user.value)" class="resumen">
+            <div class="items">
+                <p>nombre:</p>
+                <input type="text" formControlName="name">
+            </div>
+            <div class="items">
+                <p>email:</p>
+                <input type="email" formControlName="email">
+            </div>
+            <div class="items">
+                <p>celular:</p>
+                <input type="number" formControlName="phone">
+            </div>
+            <div class="items">
+                <p>medio:</p>
+                <select name="" id="" formControlName="medio">
+                    <option value=1>FACEBOOK</option>
+                    <option value=2>INSTAGRAM</option>
+                    <option value=3>WHATSAPP</option>
+                    <option value=4>EMAIL</option>
+                    <option value=5>VISITA</option>
+                    <option value=6>LLAMADA</option>
+                </select>
+            </div>
+            <div class="items">
+                <p>proyecto:</p>
+                <select name="" id="" formControlName="project">
+                    <option value=1>MONTES</option>
+                    <option value=2>NISSI</option>
+                    <option value=3>EL DESCANSO</option>
+                </select>
+            </div>
+            <div class="items">
+                <p>campaña:</p>
+                <select name="" id="" formControlName="id_camp">
+                    <option value=1>KML-MARCE</option>
+                    <option value=2>COMENTARIOS</option>
+                    <option value=3>VALLAS</option>
+                    <option value=4>LLAMADAS</option>
+                </select>
+            </div>
+            <div class="items">
+                <p>N° CASA, LOTE, APT:</p>
+                <input type="text" formControlName="interes">
+            </div>
+            <div class="items" *ngIf="eleccion">
+                <p>paso:</p>
+                <input type="text" formControlName="level">
+            </div>
+            <div class="items" *ngIf="eleccion">
+                <p>remarketing:</p>
+                <select name="" id="" formControlName="remarketing">
+                    <option value=1>SI</option>
+                    <option value=0>NO</option>
+                </select>
+            </div>
+            <button type="submit" *ngIf="!eleccion">Agregar</button>
+            <div class="items">
+                <p>Ubiacion:</p>
+                <input type="text" formControlName="ubicacion">
+            </div>
+            <button type="submit" *ngIf="eleccion">Actualizar</button>
+            <div class="items" *ngIf="eleccion">
+                <p>prioridad:</p>
+                <select name="" id="" formControlName="prioridad">
+                    <option value=0>0</option>
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="box1">
+        <app-target-client (newStarEvent)="stars($event)" ></app-target-client>
+        <app-form-two></app-form-two>
+        <app-summary-steps></app-summary-steps>
+    </div>
+</div>
+<app-stars *ngIf="stateStar" (newStarEvent)="stars($event)"></app-stars>

@@ -1,0 +1,199 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 30px;
+  gap: 20px;
+  background-color: rgb(246, 246, 246);
+}
+.load {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+}
+.medios{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.salesman{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  gap: 20px;
+}
+.box{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+.amount{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 2px;
+  transition: 0.5s;
+}
+.amount:hover{
+  background-color: black;
+  color: white;
+}
+.perfil{
+  width: 100px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.icon{
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+.name{
+  width: 100%;
+  text-align: center;
+}
+.amount:hover > .icon {
+  border: white 2px solid;
+}
+.redes{
+  display: flex;
+  flex-direction: column;
+}
+
+.tabla {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 10px;
+  }
+.tabla > p {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+tr {
+  display: grid;
+  width: 100%;
+  min-width: 800px;
+  grid-template-columns: repeat(10, 12.5%);
+}
+.tittle{
+    width: calc(100% - 8px);
+}
+.scroll{
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+th,
+td {
+  width: 100%;
+  border-bottom: solid rgb(198, 198, 198) 1px;
+  border-right: solid rgb(198, 198, 198) 1px;
+  justify-content: left;
+  align-items: center;
+  padding: 10px 4px;
+  font-family: sans-serif;
+}
+th {
+  font-size: 14px;
+}
+/* tr:nth-child(even) {
+  background-color: rgb(214, 227, 238);
+} */
+td {
+  font-size: 12px;
+  padding: 8px 4px;
+  word-wrap: break-word
+}
+tr:hover{
+    background-color: rgb(83, 83, 83);
+    color: white;
+    cursor: pointer;
+}
+td > input {
+  width: 100%;
+  height: 100%;
+}
+.load{
+  display: flex;
+  width: 320px;
+  padding: 10px;
+  border: none;
+  background: rgb(236, 239, 236);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+}
+button{
+  display: flex;
+  width: 320px;
+  padding: 10px;
+  border: none;
+  background: rgb(255, 0, 0);
+  border-radius: 12px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: large;
+  color: white;
+}
+button:disabled{
+  background: grey;
+  color: rgb(189, 189, 189);
+}
+.medio{
+  width: 25px;
+  height: 25px;
+}
+
+.cardInactive{
+  background-color: rgb(196, 196, 196);
+  color: rgb(231, 231, 231);
+}
+.cardInactive:hover{
+  background-color: rgb(196, 196, 196);
+  color: rgb(231, 231, 231);
+}
