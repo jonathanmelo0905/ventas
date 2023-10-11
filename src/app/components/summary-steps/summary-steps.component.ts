@@ -15,15 +15,13 @@ export class SummaryStepsComponent implements OnInit {
   detailClient: Clients = <Clients>{};
   getInfo: Resumen = <Resumen>{}
   resumenStep: any = [];
+  isOpenResumen = false;
   state: boolean = false;
 
   constructor(private services: DataService) { }
 
   async ngOnInit(){
     this.detailClient = JSON.parse(localStorage.getItem('cliente') || '[]');
-    this.getInfo = await this.getInfoPasosId(this.detailClient.id_client);
-    this.pasos = await this.getPasos();
-    this.getResumenes();
     this.callAndInteraction();
     await this.updateRes();
   }
@@ -39,7 +37,7 @@ export class SummaryStepsComponent implements OnInit {
       this.resumenStep.push(data)
     })
   }
-  
+
   callAndInteraction(){
     let contador = 0;
     this.getInfo.pasos.forEach(
@@ -86,5 +84,12 @@ export class SummaryStepsComponent implements OnInit {
         }
       }
     )
+  }
+
+  async openResumen(){
+    this.getInfo = await this.getInfoPasosId(this.detailClient.id_client);
+    this.pasos = await this.getPasos();
+    this.getResumenes();
+    this.isOpenResumen = true;
   }
 }

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { UrlPages } from 'src/app/enums/rutas';
 import { Clients } from 'src/app/models/clients.models';
 import { DataService } from 'src/app/services/data.service';
 
@@ -113,8 +114,7 @@ export class TargetClientComponent implements OnInit {
 
   
   signOff(){
-    localStorage.removeItem('cliente');
-    this.router.navigate(['/','home']);
+    this.router.navigate([UrlPages.HOME]);
   }
 
   openStar(){
