@@ -20,11 +20,11 @@ export class TablasComponent implements OnInit {
   listclients: boolean = true;
   nameList!: string;
   search: string = '';
+  printNewClients: number = 0;
   clientesLista: Clients[] = [];
   litsClient: Clients[] = [];
   searchList: Clients[] = [];
   itemsMedios: Medio[] = [];
-
 
   constructor(
     private router: Router,
@@ -49,6 +49,7 @@ export class TablasComponent implements OnInit {
     if(nuevosClientes > 0){
       localStorage.setItem('newClientes', JSON.stringify(nuevosClientes))
       this.clientesSvc.modalNewClients(true);
+      this.printNewClients = nuevosClientes;
     }
     localStorage.setItem('clientes', JSON.stringify(this.clientesLista.length))
     this.clientesAmount();

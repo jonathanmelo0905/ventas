@@ -7,9 +7,6 @@ import { ClientesService } from 'src/app/services/clientes.service';
   styleUrls: ['./form-one.component.css']
 })
 export class FormOneComponent implements OnInit {
-
-  // @Input('data') info: any;
-  // @Output() newItemEvent = new EventEmitter<boolean>();
   mensaje: string = '';
   amount: number = 0;
   name: string = '';
@@ -26,6 +23,7 @@ export class FormOneComponent implements OnInit {
     }else{
       this.mensaje = `Tienes un nuevo cliente`;
     }
+    localStorage.removeItem('newClientes');
   }
 
   closeModal(){

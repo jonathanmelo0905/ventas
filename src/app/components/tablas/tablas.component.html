@@ -10,7 +10,7 @@
         <p class="und">Medio</p>
         <p class="basura">paso</p>
     </div>
-    <div class="box lista" *ngFor="let client of litsClient" (click)="seeClient(client)">
+    <div class="box lista" *ngFor="let client of litsClient; index as i" (click)="seeClient(client)" [ngClass]="{'print': i < printNewClients}">
         <div class="checkbox">
             <img class="star" src="assets/iconos/star_gold.png" alt="" *ngIf="client.prioridad > 0">
             <img class="star" src="assets/iconos/star_black.png" alt="" *ngIf="client.prioridad < 1">
