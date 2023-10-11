@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Campaings, Medios, Projects } from 'src/app/enums/medios';
 import { UrlPages } from 'src/app/enums/rutas';
 import { Clients } from 'src/app/models/clients.models';
 import { DataService } from 'src/app/services/data.service';
@@ -21,59 +22,9 @@ export class TargetClientComponent implements OnInit {
   interes: number = 0;
   prioridad: number = 1;
   detailClient: Clients = <Clients>{};
-
-  projects = [
-    {
-      id: 2,
-      name: 'Casa 7',
-    },
-    {
-      id: 1,
-      name: 'Montes del retiro',
-    },
-  ];
-
-  medios = [
-    {
-      id: 1,
-      name: 'FACEBOOK',
-    },
-    {
-      id: 2,
-      name: 'INSTAGRAM',
-    },
-    {
-      id: 3,
-      name: 'WHATSAPP',
-    },
-    {
-      id: 4,
-      name: 'EMAIL',
-    },
-  ];
-
-  campaings = [
-    {
-      id: 1,
-      name: 'KML-MARCE',
-    },
-    {
-      id: 2,
-      name: 'COMENTARIOS',
-    },
-    {
-      id: 3,
-      name: 'VALLAS',
-    },
-    {
-      id: 4,
-      name: 'LLAMADAS',
-    },
-    {
-      id: 5,
-      name: 'CHATBOT-JM',
-    }
-  ];
+  projects = Projects;
+  medios = Medios;
+  campaings = Campaings;
 
   constructor(
     private router: Router,
