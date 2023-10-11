@@ -1,0 +1,28 @@
+<div class="card">    
+    <img class="icon" src="/assets/imagenes/foto.png" alt="">
+    <div class="box">
+        <p class="name">{{detailClient.name}}</p>
+        <p>Identificador: {{detailClient.id_client}}</p>
+    </div>
+    <div class="box">
+        <p>Correo: {{email}}</p>
+        <p>Celular: {{detailClient.phone}}</p>
+    </div>
+    <div class="box">
+        <p>Campaña: {{campaing}}</p>
+        <p>Medio: {{medio}}</p>
+    </div>
+    <div class="box">
+        <p>Proyecto: {{project}}</p>
+        <p>N° casa, lote, apt: {{interes}}</p>
+    </div>
+    <div class="icons">
+        <img (click)="signOff()" class="logo" src="assets/iconos/salida.png" alt="">
+        <div (click)="openStar()" class="estrella">
+            <img class="star" src="assets/iconos/star_gold.png" alt="">
+            <p class="prioridad">{{prioridad}}</p>
+        </div>
+        <img class="logo" (click)="perfil=true" src="assets/iconos/ajustes.png" alt="">
+    </div>
+</div>
+<!-- <app-edit-profile (newPerfilEvent)="closePerfil($event)" *ngIf="perfil"></app-edit-profile> -->

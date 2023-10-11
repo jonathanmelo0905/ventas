@@ -1,19 +1,19 @@
 <div class="contenedor">
+    <h1>{{ titulo }} ({{ idPasos }})</h1>
     <form class="p1" [formGroup]="infoPasos">
         <div class="box2">
-            <p class="titulo">{{ titulo }} ({{ idPasos }})</p>
+            <div class="box" *ngIf="estado === 1">
+                <p class="titulo">{{ nameB }}</p>
+                <div class="info">
+                    <p>Fecha:</p>
+                    <input type="date" class="date" formControlName="fecha_b" />
+                </div>
+                <div class="info">
+                    <p>Hora:</p>
+                    <input type="time" class="date" formControlName="hora_b" />
+                </div>
+            </div>
             <div class="box">
-                <ng-container *ngIf="estado === 1">
-                    <p class="titulo">{{ nameB }}</p>
-                    <div class="info">
-                        <p>Fecha:</p>
-                        <input type="date" class="date" formControlName="fecha_b" />
-                    </div>
-                    <div class="info">
-                        <p>Hora:  </p>
-                        <input type="time" class="date" formControlName="hora_b" />
-                    </div>
-                </ng-container>
                 <p class="titulo">{{ nameA }}</p>
                 <div class="info">
                     <p>Fecha:</p>
@@ -43,7 +43,7 @@
         </div>
         <div class="box2">
             <div class="box">
-                <div class="observaciones">
+                <div class="info">
                     <p>Observaciones:</p>
                     <textarea name="" id="" cols="40" rows="5" formControlName="observaciones"></textarea>
                 </div>
@@ -57,13 +57,16 @@
                         </select>
                     </div>
                 </ng-container>
-                <ng-container *ngIf="idPasos === 8 || idPasos === 5 || idPasos === 13">
+            </div>
+            <div class="box" *ngIf="idPasos === 8 || idPasos === 5 || idPasos === 13">
                     <div class="info" style="flex-direction: column; height: max-content">
                         <p>Reagendar cita:</p>
                         <select name="reschedule" id="" formControlName="reschedule">
                             <option value="1">NO</option>
                             <option value="2">SI</option>
                         </select>
+                    </div>
+                    <div class="info">
                         <ng-container *ngIf="idPasos != 13">
                             <p>Tipo de cita:</p>
                             <select name="typeCita" id="" formControlName="typeCita">
@@ -72,11 +75,10 @@
                             </select>
                         </ng-container>
                     </div>
-                </ng-container>
             </div>
         </div>
     </form>
-    <div class="box4">
+    <div class="box4" [ngClass]="{'box5': !infoPasos.invalid}">
         <button [disabled]="infoPasos.invalid" (click)="sendForm(1)" class="boton">
             REMARKETING
         </button>
@@ -88,5 +90,3 @@
         </button>
     </div>
 </div>
-<!-- <app-form-one *ngIf="alerta" (newItemEvent)="addItem($event)"
-    [data]="{ mensaje: mensaje, icon: 'assets/iconos/ingresar.png' }"></app-form-one> -->

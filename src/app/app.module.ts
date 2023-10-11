@@ -11,7 +11,6 @@ import { ClientesComponent } from './components/clientes/clientes.component'
 import { DescripcionComponent } from './components/descripcion/descripcion.component'
 import { FormOneComponent } from './components/form-one/form-one.component'
 import { FormTwoComponent } from './components/form-two/form-two.component'
-import { TargetClientComponent } from './components/target-client/target-client.component'
 import { SummaryStepsComponent } from './components/summary-steps/summary-steps.component'
 import { LoadClientsComponent } from './components/load-clients/load-clients.component'
 import { SpinnerComponent } from './components/spinner/spinner.component'
@@ -28,6 +27,7 @@ import { InicioComponent } from './session/inicio/inicio.component';
 import { TablasComponent } from './components/tablas/tablas.component';
 import { ClientsList } from './directivas/clientesInfo';
 import { ResumenClientesComponent } from './components/filtro/resumen-clientes.component';
+import { TargetClientComponent } from './components/card-cliente/target-client.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,6 @@ import { ResumenClientesComponent } from './components/filtro/resumen-clientes.c
     DescripcionComponent,
     FormOneComponent,
     FormTwoComponent,
-    TargetClientComponent,
     SummaryStepsComponent,
     LoadClientsComponent,
     SpinnerComponent,
@@ -49,7 +48,8 @@ import { ResumenClientesComponent } from './components/filtro/resumen-clientes.c
     LoginComponent,
     InicioComponent,
     TablasComponent,
-    ResumenClientesComponent
+    ResumenClientesComponent,
+    TargetClientComponent
   ],
   imports: [
     // NgxChartsModule,
