@@ -8,6 +8,7 @@ export interface Result {
     estatus: number;
     name_a:  string;
     name_b:  string;
+    state:   boolean;
 }
 
 export interface InfoPaso {

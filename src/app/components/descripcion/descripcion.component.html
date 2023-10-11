@@ -1,6 +1,6 @@
 <div class="container">
     <app-target-client (newStarEvent)="stars($event)" ></app-target-client>
     <app-form-two></app-form-two>
-    <!-- <app-summary-steps></app-summary-steps> -->
+    <app-summary-steps></app-summary-steps>
 </div>
 <app-stars *ngIf="stateStar" (newStarEvent)="stars($event)"></app-stars>

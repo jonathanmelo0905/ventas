@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Clients } from 'src/app/models/clients.models';
-import { Pasos, Result } from 'src/app/models/pasos.models';
+import { InfoPaso, Pasos, Result } from 'src/app/models/pasos.models';
 import { Resumen } from 'src/app/models/resumen.models';
 import { DataService } from 'src/app/services/data.service';
 
@@ -14,6 +14,7 @@ export class SummaryStepsComponent implements OnInit {
   pasos: Result[] = [];
   detailClient: Clients = <Clients>{};
   getInfo: Resumen = <Resumen>{}
+  resumenStep: any = [];
   state: boolean = false;
 
   constructor(private services: DataService) { }
@@ -22,10 +23,23 @@ export class SummaryStepsComponent implements OnInit {
     this.detailClient = JSON.parse(localStorage.getItem('cliente') || '[]');
     this.getInfo = await this.getInfoPasosId(this.detailClient.id_client);
     this.pasos = await this.getPasos();
+    this.getResumenes();
     this.callAndInteraction();
     await this.updateRes();
   }
 
+  getResumenes(){
+    this.pasos.forEach( step =>{
+      let data = this.getInfo.pasos.filter(res=>{
+        return res.paso === step.id
+      })
+      data.length == 0 ? 
+      step.state = false : 
+      step.state = true;
+      this.resumenStep.push(data)
+    })
+  }
+  
   callAndInteraction(){
     let contador = 0;
     this.getInfo.pasos.forEach(
@@ -57,15 +71,6 @@ export class SummaryStepsComponent implements OnInit {
     });
   }
 
-  filterStep(id: number){
-    this.state = false;
-    let data = this.getInfo.pasos.filter((step: any)=>{
-      return step.paso === id
-    })
-    if(data.length === 0)this.state = true;
-    return data;
-  }
-
   medio(id: number){
     let data = ''
     id === 1 ? data = 'Whatsapp' : id === 2 ? data = 'Llamada' : data = 'Correo';
@@ -75,9 +80,9 @@ export class SummaryStepsComponent implements OnInit {
    async updateRes(){
     this.services.resumen$.subscribe(
       async res=>{
-        console.log(res)
         if(res){
           this.getInfo = await this.getInfoPasosId(this.detailClient.id_client);
+          this.resumenStep();
         }
       }
     )

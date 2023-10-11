@@ -1,25 +1,24 @@
-<ng-container>
-    <div class="container" *ngFor="let paso of pasos">
-        <h1>Paso {{paso.id}}</h1>
-        <ng-container *ngIf="pasos.length != 0">
-            <div class="target" *ngFor="let data of filterStep(paso.id)">
-                <p class="id">Id: <br> {{data.id}}</p>
-                <div class="zonas">
-                    <h3>{{paso.name_a}}</h3>
-                    <p>Fecha: {{data.fecha_a | date}}</p>
-                    <p>Hora: {{data.hora_a}}</p>
-                </div>
-                <div class="zonas" *ngIf="paso.estatus === 1">
-                    <h3>{{paso.name_b}}</h3>
-                    <p>Fecha: {{data.fecha_b | date}}</p>
-                    <p>Hora: {{data.hora_a}}</p>
-                </div>
+<ng-container *ngFor="let paso of pasos; index as i" >
+    <div class="contenedor" [ngClass]="{'nodisplay': !paso.state}" >
+        <h1>{{paso.name}} ({{paso.id}})</h1>
+        <div class="card" *ngFor="let data of resumenStep[i]">
+            <p class="id">Id: <br> {{data.id}}</p>
+            <div class="zonas">
+                <h3>{{paso.name_a}}</h3>
+                <p>Fecha: {{data.fecha_a | date}}</p>
+                <p>Hora: {{data.hora_a}}</p>
+            </div>
+            <div class="zonas" *ngIf="paso.estatus === 1">
+                <h3>{{paso.name_b}}</h3>
+                <p>Fecha: {{data.fecha_b | date}}</p>
+                <p>Hora: {{data.hora_a}}</p>
+            </div>
+            <div class="medio">
                 <p>Medio: {{medio(data.medio)}}</p>
-                <p class="observaciones">Observaciones: <br> {{data.observaciones}}</p>
             </div>
-            <div class="target" *ngIf="state">
-                <p>No hay informacion por el momento</p>
+            <div class="zonas">
+                <p class="observaciones">Observaciones: {{data.observaciones}}</p>
             </div>
-        </ng-container>
+        </div>
     </div>
 </ng-container>
