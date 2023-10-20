@@ -9,6 +9,7 @@ export interface Result {
     name_a:  string;
     name_b:  string;
     state:   boolean;
+    comentario: string;
 }
 
 export interface InfoPaso {

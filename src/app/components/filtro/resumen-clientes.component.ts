@@ -16,8 +16,6 @@ export class ResumenClientesComponent implements OnInit {
   constructor(private data: ClientsList,
     private infoSvc: ClientesService
   ) { }
-  
-  // constructor(private readonly materialesSvc: MaterialesService){}
 
   estado: boolean = false;
   medios!: Medio[];

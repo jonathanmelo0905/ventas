@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'http://localhost:3000/habitat'
+  // apiUrl: 'http://localhost:3000/habitat'
   apiUrl: 'https://back.habitatconstructores.co/habitat'
   //apiUrl: 'http://192.168.0.125:3000/habitat'
 };

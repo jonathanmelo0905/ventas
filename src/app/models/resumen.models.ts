@@ -6,9 +6,9 @@ export interface Resumen {
 export interface Pasos {
     id:            number;
     id_client:     number;
-    fecha_a:       Date;
+    fecha:       Date;
     fecha_b:       Date;
-    hora_a:        string;
+    hora:        string;
     hora_b:        string;
     observaciones: string;
     paso:          number;

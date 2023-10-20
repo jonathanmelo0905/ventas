@@ -18,12 +18,10 @@ export class FormTwoComponent implements OnInit {
   reschedule: number = 0;
   stepThree: number = 0;
   titulo: string = '';
-  nameA: string = '';
-  nameB: string = '';
   mensaje: string = '';
   state: boolean = false;
   alerta: boolean = false;
-  info: Result[] = [];
+  info!: Result | undefined;
   pasos: Result[] = [];
   detailClient: Clients = <Clients>{};
   informacion: InfoPaso = <InfoPaso>{};
@@ -39,31 +37,19 @@ export class FormTwoComponent implements OnInit {
     this.createForm();
     this.detailClient = JSON.parse(localStorage.getItem('cliente') || '[]');
     this.pasos = await this.getPasos();
+    console.log("this.pasos:", this.pasos)
     this.nextStep();
-    this.callAndInteraction(); 
   }
 
-  callAndInteraction(){
-    this.services.stepThree$.subscribe(
-      step=>{
-        this.stepThree = step;
-        console.log("melo ~ file: form-two.component.ts:49 ~ FormTwoComponent ~ callAndInteraction ~ stepThree:", this.stepThree)
-      }
-    )
-  }
 
   createForm() {
     this.infoPasos = new FormGroup({
-      fecha_a: new FormControl('', Validators.required),
-      fecha_b: new FormControl(''),
-      hora_a: new FormControl('', Validators.required),
-      hora_b: new FormControl(''),
-      id_client: new FormControl(''),
+      fecha: new FormControl('', Validators.required),
+      hora: new FormControl('', Validators.required),
       observaciones: new FormControl('', Validators.required),
+      medio: new FormControl('', Validators.required),
+      id_client: new FormControl(''),
       pasos: new FormControl(''),
-      typeCita: new FormControl(''),
-      reschedule: new FormControl(''),
-      medio: new FormControl('', Validators.required)
     });
   }
 
@@ -71,6 +57,7 @@ export class FormTwoComponent implements OnInit {
   getPasos() {
     return new Promise<Result[]>((resolve) => {
       this.services.getPasos().subscribe((res) => {
+        console.log(res)
         resolve(res.result);
       });
     });
@@ -79,102 +66,57 @@ export class FormTwoComponent implements OnInit {
   //evalua en que paso esta y cual paso debe mostrar
   async nextStep() {
     this.status = this.detailClient.level;
-    if (this.status === 0 || this.status === 1) {
-      this.idPasos = 2;
-    } else if (this.status >= 2) {
-      this.idPasos = this.status + 1;
-    }
-    this.info = this.pasos.filter((n: Result) => {
+    this.idPasos = this.status;
+    this.info = this.pasos.find((n: Result) => {
       return n.id === this.idPasos;
     });
-    this.estado = this.info[0].estatus;
-    this.titulo = this.info[0].name;
-    this.nameA = this.info[0].name_a;
-    this.nameB = this.info[0].name_b;
+    this.estado = this.info!.estatus;
+    this.titulo = this.info!.name;
   }
 
   sendForm(id: number) {
-    this.informacion.fecha_a = this.infoPasos.value.fecha_a;
-    this.informacion.hora_a = this.infoPasos.value.hora_a;
-    this.informacion.fecha_b = this.infoPasos.value.fecha_b;
-    this.informacion.hora_b = this.infoPasos.value.hora_b;
-    this.informacion.id_client = this.detailClient.id_client;
-    this.informacion.observaciones = this.infoPasos.value.observaciones;
-    this.informacion.paso = this.idPasos;
-    this.informacion.medio = this.infoPasos.value.medio;
-    this.typeCita = this.infoPasos.value.typeCita;
-    this.reschedule = this.infoPasos.value.reschedule;
-    this.parameters(id);
-    sessionStorage.removeItem('lista-clientes')
+    this.infoPasos.patchValue({
+      id_client: this.detailClient.id_client,
+      pasos: this.idPasos
+
+    })
+    console.log(this.infoPasos.value)
+    id == 2 ? 
+      this.saveInfo(id) :
+      this.onUpdateStepClient(id);
+  }
+
+  onUpdateStepClient(remarketing: number){
+    this.services.update(this.infoPasos.value.id_client, this.infoPasos.value.pasos + 1, remarketing).subscribe({
+      next: (res: any)=>{
+        if(res.state){
+          console.log(res)
+          this.saveInfo();
+        }else{
+          this.onUpdateStepClient(remarketing);
+        }
+      }
+    })
   }
 
 
-  //1 : REAGENDAR NO, VIRTUAL 2: REAGENDAR SI, PRESENCIAL
-  parameters(id: number){
-    let state = true;
-    let pasos = this.idPasos;
-    let remarketing = 0;
-    id === 3 ? (pasos = 16) : id === 1 ? (remarketing = 1, this.state = true) : false;
-    this.reschedule == 2 && pasos === 8 ? (pasos = pasos -2) : false;
-    this.reschedule == 2 && pasos === 13 ? (pasos = pasos -2) : false;
-    this.typeCita == 2 && pasos === 3 ? (pasos = 6) : false;
-    this.reschedule == 2 && this.typeCita == 1
-      ? (pasos = this.idPasos - 2)
-      : this.reschedule == 2 && this.typeCita == 2
-      ? (pasos = 6)
-      : false;
-    this.typeCita == 3 ? state = false : state = true;
-    this.saveInfo(pasos, remarketing, state);
-  }
-
-  saveInfo(pasos: number, remarketing: number, state: boolean) {
-    this.services.saveInfo(this.informacion).subscribe((res: any) => {
-      if(res.state){
-        console.log(res, 'se salvo el paso en la base de datos');
-        this.infoPasos.reset(this.infoPasos)
-        this.updateStepClient(state, pasos, remarketing)
-      }else{
-        console.log(res,'no se guardo la info correctamente')
-        this.mensaje = 'No se guardo la info correctamente';
-        this.alerta = true;
+  saveInfo(id: number = 0) {
+    this.services.saveInfo(this.infoPasos.value).subscribe({
+      next: (res: any) => {
+        if(res.state){
+          console.log(res, 'se salvo el paso en la base de datos', res); 
+          if(id != 2){
+            this.detailClient.level = this.idPasos + 1;
+            localStorage.removeItem('cliente');
+            localStorage.setItem('cliente', JSON.stringify(this.detailClient))
+            this.nextStep();
+          }
+          this.infoPasos.reset(this.infoPasos)
+        }else{
+          console.log(res,'no se guardo la info correctamente')
+          this.saveInfo();
+        }
       }
     });
-  }
-
-  updateStepClient(state: boolean, pasos: number, remarketing: number){
-    if(state){
-      this.services.update(this.informacion.id_client, pasos, remarketing).subscribe((res: any) => {
-        if(res.state){
-          console.log(res, 'se cambio el paso en el perfil del cliente');
-          this.updateCliente(this.informacion.id_client)
-        }else{
-          console.log('no se actualizo el paso en el cliente porfavor puedes actualizarlo manualmente')
-          this.mensaje = 'No se actualizo el paso en el cliente porfavor puedes actualizarlo manualmente';
-          this.alerta = true;
-        }
-      });
-    }else{
-      this.updateCliente(this.informacion.id_client)
-    }
-  }
-
-  updateCliente(id: number){
-    this.services.getClientId(id).subscribe(
-      res =>{
-        console.log('se llamo al cliente por su id')
-        localStorage.setItem('cliente', JSON.stringify(res.clients[0]))
-        this.detailClient = res.clients[0];
-        this.services.sendSearch(true);
-        this.nextStep();
-        if(this.state){
-          this.router.navigate(['/','home'])
-          this.state = false;
-        }
-      }
-    )
-  }
-
-  addItem(estado: boolean) {
-    this.alerta = estado;
   }
 }

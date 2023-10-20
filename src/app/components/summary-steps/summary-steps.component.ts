@@ -22,7 +22,7 @@ export class SummaryStepsComponent implements OnInit {
 
   async ngOnInit(){
     this.detailClient = JSON.parse(localStorage.getItem('cliente') || '[]');
-    this.callAndInteraction();
+    // this.callAndInteraction();
     await this.updateRes();
   }
 
@@ -37,20 +37,7 @@ export class SummaryStepsComponent implements OnInit {
       this.resumenStep.push(data)
     })
   }
-
-  callAndInteraction(){
-    let contador = 0;
-    this.getInfo.pasos.forEach(
-      step =>{
-        if(step.paso == 3){
-          contador++;
-        }
-      }
-    )
-    this.services.sendStepThree(contador)
-  }
-
-  //se llama la guia de los pasos y sus titulos
+  
   getPasos() {
     return new Promise<Result[]>((resolve) => {
       this.services.getPasos().subscribe((res) => {
@@ -75,12 +62,11 @@ export class SummaryStepsComponent implements OnInit {
     return data;
   }
 
-   async updateRes(){
+  async updateRes(){
     this.services.resumen$.subscribe(
       async res=>{
         if(res){
           this.getInfo = await this.getInfoPasosId(this.detailClient.id_client);
-          this.resumenStep();
         }
       }
     )
@@ -91,5 +77,10 @@ export class SummaryStepsComponent implements OnInit {
     this.pasos = await this.getPasos();
     this.getResumenes();
     this.isOpenResumen = true;
+  }
+
+  updateResumen(){
+    this.resumenStep = [];
+    this.openResumen();
   }
 }

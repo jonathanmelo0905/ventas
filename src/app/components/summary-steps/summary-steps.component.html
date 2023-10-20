@@ -2,6 +2,9 @@
     <button class="boton" (click)="openResumen()">Ver resumen del cliente</button>
 </div>
 <ng-template #resumenes>
+    <div class="contenedor">
+        <button class="boton" (click)="updateResumen()">Actualizar resumen</button>
+    </div>
     <ng-container *ngFor="let paso of pasos; index as i" >
         <div class="contenedor" [ngClass]="{'nodisplay': !paso.state}" >
             <h1>{{paso.name}} ({{paso.id}})</h1>
@@ -9,13 +12,8 @@
                 <p class="id">Id: <br> {{data.id}}</p>
                 <div class="zonas">
                     <h3>{{paso.name_a}}</h3>
-                    <p>Fecha: {{data.fecha_a | date}}</p>
-                    <p>Hora: {{data.hora_a}}</p>
-                </div>
-                <div class="zonas" *ngIf="paso.estatus === 1">
-                    <h3>{{paso.name_b}}</h3>
-                    <p>Fecha: {{data.fecha_b | date}}</p>
-                    <p>Hora: {{data.hora_a}}</p>
+                    <p>Fecha: {{data.fecha | date}}</p>
+                    <p>Hora: {{data.hora}}</p>
                 </div>
                 <div class="medio">
                     <p>Medio: {{medio(data.medio)}}</p>
