@@ -21,11 +21,11 @@ export class LoadClientsComponent implements OnInit {
   dataClientes: DataClients = <DataClients>{};
   vendedores: InfoSalesman[] = []
   itemsMedios: Medio[]= []
-  clientes: Array<Clients> = [];
-  filtros: Array<Clients> = [];
+  clientes: Clients[] = [];
+  filtros: Clients[] = [];
   redes: Array<any> = []
   amount: Array<any> = [];
-  repeat: Array<Clients> = [];
+  repeat: Clients[] = [];
   file!: any;
   status: boolean = false;
   cantidad: number = 0;

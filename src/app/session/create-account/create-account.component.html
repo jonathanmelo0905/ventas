@@ -1,6 +1,4 @@
-<div class="conatiner">
-    <form  class="session"  [formGroup]="register" (ngSubmit)="validationRegister(register.value)">
-        <img class="icon" src="assets/iconos/habitat.png" alt="">
+<form  class="session"  [formGroup]="register" (ngSubmit)="validationRegister(register.value)">
         <h2 class="texto">Registrarte </h2>
         <input formControlName="name" type="text" placeholder="Nombres y Apellidos">
         <input formControlName="cedula" type="tel" placeholder="Cedula">
@@ -8,8 +6,7 @@
         <input formControlName="user" type="text" placeholder="Usuario">
         <input formControlName="password" type="password" placeholder="Contraseña">
         <input formControlName="repeatPassword" type="password" placeholder="Confirma la contraseña">
-        <button type="submit" class="boton">Crear cuenta nueva</button>
+        <button type="submit" [disabled]="register.invalid" class="boton">Crear cuenta nueva</button>
         <button (click)="backButton()" class="boton2">Iniciar sesión</button>
         <p *ngIf="isPassword">{{alertPassword}}</p>
-    </form>
-</div>
+</form>
