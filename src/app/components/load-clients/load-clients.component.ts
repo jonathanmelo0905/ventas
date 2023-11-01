@@ -20,7 +20,7 @@ export class LoadClientsComponent implements OnInit {
   formatoCliente: NewClients = <NewClients>{};
   dataClientes: DataClients = <DataClients>{};
   vendedores: InfoSalesman[] = []
-  itemsMedios: Array<Medio> = []
+  itemsMedios: Medio[]= []
   clientes: Array<Clients> = [];
   filtros: Array<Clients> = [];
   redes: Array<any> = []
@@ -66,64 +66,16 @@ export class LoadClientsComponent implements OnInit {
     }
   ]
 
-  horas: number[] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-  semana: any[] = [
-    {
-      name: 'domingo',
-      amount: 0
-    },
-    {
-      name: 'lunes',
-      amount: 0
-    },
-    {
-      name: 'martes',
-      amount: 0
-    },
-    {
-      name: 'miercoles',
-      amount: 0
-    },
-    {
-      name: 'jueves',
-      amount: 0
-    },
-    {
-      name: 'viernes',
-      amount: 0
-    },
-    {
-      name: 'sabado',
-      amount: 0
-    },
-  ]
 
   constructor(private router: Router, private servicesClient: DataService) { }
 
   async ngOnInit() {
     this.getSaleman = await this.getVendedores();
     this.vendedores = this.getSaleman.clients;
-    console.log("vendedores:", this.vendedores)
     this.dataClientes = await this.getclients();
     this.itemsMedios = await this.getMedios();
-    console.log("medios de captacion de clientes:", this.itemsMedios)
     this.redesAmounts();
-    this.horarios();
     this.status = true;
-  }
-
-  horarios(){
-    // this.dataClientes.clients.forEach(
-    //   cliente =>{
-    //     let hora = cliente.time.split(':')
-    //     this.horas[parseInt(hora[0])]++;
-    //     let fecha = cliente.date;
-    //     let numDia = new Date(fecha).getDay();
-    //     this.semana[numDia].amount++;
-    //   }
-    // )
-    // console.log("hora:", this.horas)
-    // console.log("semana:", this.semana)
   }
   
   //este codigo me pinta la cantidad de clientes de cada vendedor
@@ -137,6 +89,7 @@ export class LoadClientsComponent implements OnInit {
 
   //convierte el formato de carga de excell a json
   cargar(event: any) {
+    this.clientes = [];
     const selectedFile = event.target.files[0];
     event.target.value = null;
     const fileRead = new FileReader();
@@ -201,7 +154,6 @@ export class LoadClientsComponent implements OnInit {
         this.amount.push(cantidad);
       }
     )
-    console.log('pruebas',this.amount)
   }
 
 
@@ -226,6 +178,7 @@ export class LoadClientsComponent implements OnInit {
   getclients() {
     return new Promise<DataClients>((resolve) => {
       this.servicesClient.getClient().subscribe((res) => {
+        console.log("res:", res)
         resolve(res);
       });
     });
@@ -281,19 +234,9 @@ export class LoadClientsComponent implements OnInit {
     this.vendedores.forEach( vendedor=>{
       if(vendedor.estado)numVendedores++
     })
-    console.log("numVendedores:", numVendedores);
-
-
-
-
-    // for (let amount of this.amount) {
-    //   amount.sort((a: any, b: any) => a.amount - b.amount);
-    // }
-
     this.amount.forEach( amount =>{
       amount.sort((a:any, b:any) => a.amount - b.amount);
     })
-
 
 
     if (nuevosClientes > 0) {
@@ -333,13 +276,13 @@ export class LoadClientsComponent implements OnInit {
   //esta funcion revisa si los clientes que se encuentran en la base de datos estan repetidos con los que se van a cargar
 
   repeatCustomer() {
+    this.repeat = []
     this.clientes.forEach(
       cliente => {
-        console.log("cliente:", cliente)
         let data: any = this.dataClientes.clients.find(
           data => {
             let day = this.diferencia(data.date, cliente.date);
-            return ((data.email == cliente.email || data.phone == cliente.phone) && day < 60)
+            return ((data.email == cliente.email || data.phone == cliente.phone) && day < 30)
           }
         );
         if (data) this.repeat.push(data);

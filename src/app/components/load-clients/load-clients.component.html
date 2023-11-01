@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="salesman" *ngIf="status">
-        <p>Vendedores</p>
+<div class="container" *ngIf="status">
+    <div class="salesman">
+        <h1>Vendedores</h1>
         <div class="box">
-            <div class="amount" *ngFor="let vendedor of vendedores"  [ngClass]="{'cardInactive': !vendedor.estado}">
+            <div class="card" *ngFor="let vendedor of vendedores"  [ngClass]="{'cardInactive': !vendedor.estado}">
                 <div class="perfil">
                     <img class="icon" src={{vendedor.url}} alt="">
                     <p class="name">{{vendedor.name}}</p>
@@ -21,28 +21,35 @@
         </div>
     </div> -->
     <div class="list">
-        <p>cargar excell</p>
-        <input type="file" accept=".xlsx,.xls" name="cargar" (change)="cargar($event)" class="load">
-        <h3>Cantidad de clientes: {{clientes.length}}</h3>
-        <div class="medios">
+        <div class="informacion">
+            <div class="clientes">
+                <h2>Cargar clientes:</h2>
+                <input type="file" accept=".xlsx,.xls" name="cargar" (change)="cargar($event)" class="load">
+            </div>
+            <ng-container *ngIf="redes.length">
+                <h3>Cantidad de clientes: {{clientes.length}}</h3>
+                <h3>Clientes repetidos: {{cantidad}}</h3>
+            </ng-container>
+        </div>
+        <div class="medios" *ngIf="clientes.length">
             <ng-container *ngFor="let red of redes; index as i">
                 <img class="medio" src={{icons[i].url}} alt="">
                 <p>:{{red.length}}</p>
             </ng-container>
         </div>
-        <p>Clientes repetidos: {{cantidad}}</p>
-        <div class="tabla">
+
+        <div class="tabla" *ngIf="clientes.length">
             <p>lista de clientes</p>
             <table>
                 <tr class="tittle">
                     <th>Nombre</th>
                     <th>Celular</th>
                     <th>Email</th>
-                    <th>id_camp</th>
-                    <th>medio</th>
-                    <th>project</th>
-                    <th>date</th>
-                    <th>time</th>
+                    <th>Campaña</th>
+                    <th>Medio</th>
+                    <th>Proyecto</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
                 </tr>
                 <div class="scroll">
                     <tr *ngFor="let client of clientes">
@@ -59,7 +66,12 @@
             </table>
             <p>Clientes cargados: {{loadClients}}</p>
             <p>{{mensaje}}</p>
-            <button [disabled]="clientes.length == 0" (click)="loadClient()">Cargar clientes</button>
+            <button (click)="loadClient()">Cargar clientes</button>
+        </div>
+        <div class="mensaje" *ngIf="!clientes.length && redes.length">
+            <h3>No hay clientes disponibles para cargar.</h3>
+            <img src="assets/icons/user-no.svg" alt="" class="icon_alert">
         </div>
     </div>
 </div>
+

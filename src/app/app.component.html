@@ -1,2 +1,10 @@
-<app-spinner></app-spinner>
-<router-outlet></router-outlet>
+<ng-container *ngIf="isOffline; else isOff">
+    <app-spinner></app-spinner>
+    <router-outlet></router-outlet>
+</ng-container>
+<ng-template #isOff>
+    <div class="container error">
+        <p>404</p>
+        <h1>Error de conexion</h1>
+    </div>
+</ng-template>

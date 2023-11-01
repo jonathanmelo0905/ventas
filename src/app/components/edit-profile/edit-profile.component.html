@@ -1,9 +1,12 @@
 <div class="container">
     <div class="box">
         <img class="back" (click)="
-        close()" src="assets/iconos/volver-flecha.png" alt="">
+        close()" src="assets/icons/cancelar.png" alt="">
+
         <h1>Editar informacion del cliente</h1>
-        <form novalidate [formGroup]="user" (submit)="actualizar(user.value)" class="resumen">
+
+        <form novalidate [formGroup]="user" class="resumen">
+
             <div class="items">
                 <p>nombre:</p>
                 <input type="text" formControlName="name">
@@ -14,7 +17,7 @@
             </div>
             <div class="items">
                 <p>celular:</p>
-                <input type="number" formControlName="phone">
+                <input type="tel" formControlName="phone">
             </div>
             <div class="items">
                 <p>medio:</p>
@@ -45,12 +48,19 @@
                 </select>
             </div>
             <div class="items">
-                <p>N° CASA, LOTE, APT:</p>
+                <p>Interes(casa,lote,apt):</p>
                 <input type="text" formControlName="interes">
             </div>
             <div class="items" *ngIf="eleccion">
                 <p>paso:</p>
-                <input type="text" formControlName="level">
+                <select name="" id="" formControlName="level">
+                    <option value=1>1</option>
+                    <option value=2>2</option>
+                    <option value=3>3</option>
+                    <option value=4>4</option>
+                    <option value=5>5</option>
+                    <option value=6>6</option>
+                </select>
             </div>
             <div class="items" *ngIf="eleccion">
                 <p>remarketing:</p>
@@ -59,12 +69,10 @@
                     <option value=0>NO</option>
                 </select>
             </div>
-            <button type="submit" *ngIf="!eleccion">Agregar</button>
             <div class="items">
-                <p>Ubiacion:</p>
+                <p>Lugar de residencia:</p>
                 <input type="text" formControlName="ubicacion">
             </div>
-            <button type="submit" *ngIf="eleccion">Actualizar</button>
             <div class="items" *ngIf="eleccion">
                 <p>prioridad:</p>
                 <select name="" id="" formControlName="prioridad">
@@ -77,5 +85,7 @@
                 </select>
             </div>
         </form>
+        <button type="button" *ngIf="!eleccion" (click)="actualizar()">Agregar</button>
+        <button type="button" *ngIf="eleccion" (click)="actualizar()">Actualizar</button>
     </div>
 </div>

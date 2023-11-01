@@ -13,6 +13,7 @@ import { DataService } from 'src/app/services/data.service';
 export class TargetClientComponent implements OnInit {
 
   @Output() newStarEvent = new EventEmitter<boolean>();
+  
   nameClient = '';
   project = '';
   medio = '';

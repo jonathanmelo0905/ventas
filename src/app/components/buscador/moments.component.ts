@@ -12,6 +12,7 @@ export class MomentsComponent implements OnInit{
   isFiltro: boolean = false;
   buscarName: string = '';
   filtroName: string = '';
+  newClient: boolean = false;
 
   constructor(
     private readonly dataSvc: ClientesService
@@ -20,6 +21,11 @@ export class MomentsComponent implements OnInit{
   ngOnInit(): void {
       this.onFilter();
       this.onStar();
+      this.deleteClient();
+  }
+
+  deleteClient(){
+    localStorage.removeItem('cliente')
   }
 
   openFiltro(){
@@ -64,6 +70,10 @@ export class MomentsComponent implements OnInit{
       this.dataSvc.search(this.buscarName);
     }
     this.buscarName = ''
+  }
+
+  closePerfil(estado: boolean){
+    this.newClient = estado;
   }
 
 }

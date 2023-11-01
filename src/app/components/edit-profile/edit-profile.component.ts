@@ -10,10 +10,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class EditProfileComponent implements OnInit {
   @Output() newPerfilEvent = new EventEmitter<boolean>();
-  @Input('data') estado: boolean = true;
+
   infoClient: Clients = <Clients>{};
   cliente: Clients = <Clients>{};
-  
   user: FormGroup = new FormGroup({});
   eleccion: boolean = true;
 
@@ -22,11 +21,17 @@ export class EditProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    const data = JSON.parse(localStorage.getItem('cliente') || '[]');
+    const data = JSON.parse(localStorage.getItem('cliente') || 'false');
+    console.log("data:", data)
+    if(data){
+      console.log('verdadero')
+    }else{
+      console.log('falso')
+    }
+    data ? this.eleccion = true : this.eleccion = false;
     this.infoClient = data;
     this.updateForm();
     this.asignar(data);
-    this.eleccion = this.estado;
   }
 
   
@@ -50,23 +55,26 @@ export class EditProfileComponent implements OnInit {
   }
 
   asignar(data:Clients){
-    this.user.controls['id_resp'].setValue(data.id_resp);
-    this.user.controls['name'].setValue(data.name);
-    this.user.controls['phone'].setValue(data.phone);
-    this.user.controls['email'].setValue(data.email);
-    this.user.controls['id_camp'].setValue(data.id_camp);
-    this.user.controls['medio'].setValue(data.medio);
-    this.user.controls['project'].setValue(data.project);
-    this.user.controls['date'].setValue(data.date);
-    this.user.controls['time'].setValue(data.time);
-    this.user.controls['level'].setValue(data.level);
-    this.user.controls['remarketing'].setValue(data.remarketing);
-    this.user.controls['ubicacion'].setValue(data.ubicacion);
-    this.user.controls['prioridad'].setValue(data.prioridad);
-    this.user.controls['interes'].setValue(data.interes);
+    this.user.patchValue({
+      id_resp : data.id_resp,
+      name : data.name,
+      phone : data.phone,
+      email : data.email,
+      id_camp : data.id_camp,
+      medio : data.medio,
+      project : data.project,
+      date : data.date,
+      time : data.time,
+      level : data.level,
+      remarketing : data.remarketing,
+      ubicacion : data.ubicacion,
+      prioridad : data.prioridad,
+      interes : data.interes
+    })
   }
 
-  actualizar(data: Clients){
+  actualizar(){
+    let data = this.user.value;
     if(this.eleccion){
       this.services.updateCliente(this.infoClient.id_client,data).subscribe(
         res =>{
